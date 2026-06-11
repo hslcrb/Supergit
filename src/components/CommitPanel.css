@@ -1,0 +1,137 @@
+.commit-panel {
+  max-width: 1200px;
+}
+
+.commit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.commit-header h2 {
+  font-size: 24px;
+  color: #cccccc;
+}
+
+.commit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.commit-item-container {
+  background: #2d2d30;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.commit-item {
+  padding: 15px;
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.commit-item:hover {
+  background: #3e3e42;
+}
+
+.commit-item.selected {
+  background: #1a2332;
+  border-left: 3px solid #58a6ff;
+}
+
+.commit-hash {
+  background: #3e3e42;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: #58a6ff;
+  font-weight: 600;
+}
+
+.commit-details {
+  flex: 1;
+}
+
+.commit-message {
+  color: #d4d4d4;
+  font-size: 14px;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.commit-meta {
+  display: flex;
+  gap: 20px;
+  font-size: 12px;
+  color: #808080;
+}
+
+.commit-author,
+.commit-date {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.commit-expanded {
+  padding: 15px;
+  background: #1e1e1e;
+  border-top: 1px solid #3e3e42;
+}
+
+.commit-info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.info-row {
+  display: flex;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.info-row strong {
+  color: #cccccc;
+  min-width: 80px;
+}
+
+.info-row code {
+  background: #3e3e42;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  color: #58a6ff;
+}
+
+.info-row span {
+  color: #d4d4d4;
+}
+
+.commit-body {
+  background: #2d2d30;
+  padding: 12px;
+  border-radius: 4px;
+}
+
+.commit-body strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #cccccc;
+}
+
+.commit-body pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  color: #d4d4d4;
+  margin: 0;
+}

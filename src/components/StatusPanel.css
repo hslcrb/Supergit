@@ -1,0 +1,150 @@
+.status-panel {
+  max-width: 1200px;
+}
+
+.status-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.status-header h2 {
+  font-size: 24px;
+  color: #cccccc;
+}
+
+.status-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.current-branch {
+  background: #2d2d30;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.branch-name {
+  background: #094771;
+  color: #58a6ff;
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+}
+
+.file-section {
+  background: #2d2d30;
+  padding: 20px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.file-section h3 {
+  color: #cccccc;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-sm {
+  font-size: 12px;
+  padding: 5px 10px;
+  margin-left: auto;
+}
+
+.file-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.file-item {
+  background: #3e3e42;
+  padding: 10px 15px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.2s;
+}
+
+.file-item:hover {
+  background: #505050;
+}
+
+.file-item.staged {
+  border-left: 3px solid #3fb950;
+}
+
+.file-item.modified {
+  border-left: 3px solid #f0883e;
+}
+
+.file-item.new {
+  border-left: 3px solid #58a6ff;
+}
+
+.file-status {
+  background: #1e1e1e;
+  color: #f0883e;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.file-path {
+  flex: 1;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+}
+
+.btn-stage {
+  background: #238636;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+.btn-stage:hover {
+  background: #2ea043;
+}
+
+.commit-section {
+  background: #2d2d30;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.commit-section h3 {
+  color: #cccccc;
+  margin-bottom: 15px;
+}
+
+.commit-input {
+  width: 100%;
+  margin-bottom: 15px;
+  min-height: 80px;
+}
+
+.clean-status {
+  background: #1a3d2e;
+  border: 1px solid #238636;
+  padding: 30px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.clean-status p {
+  color: #3fb950;
+  font-size: 16px;
+}

@@ -1,0 +1,153 @@
+.branch-panel {
+  max-width: 1200px;
+}
+
+.branch-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.branch-header h2 {
+  font-size: 24px;
+  color: #cccccc;
+}
+
+.current-branch-display {
+  background: #2d2d30;
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.branch-tag {
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.branch-tag.current {
+  background: #094771;
+  color: #58a6ff;
+}
+
+.branch-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.branch-section {
+  background: #2d2d30;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.branch-section h3 {
+  color: #cccccc;
+  margin-bottom: 15px;
+}
+
+.branch-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.branch-item {
+  background: #3e3e42;
+  padding: 12px 15px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: background 0.2s;
+}
+
+.branch-item:hover {
+  background: #505050;
+}
+
+.branch-item.current {
+  border-left: 3px solid #58a6ff;
+  background: #1a2332;
+}
+
+.branch-item.remote {
+  border-left: 3px solid #a371f7;
+}
+
+.branch-icon {
+  font-size: 18px;
+  color: #58a6ff;
+}
+
+.branch-item.current .branch-icon {
+  color: #58a6ff;
+}
+
+.branch-item.remote .branch-icon {
+  font-size: 14px;
+}
+
+.branch-name {
+  flex: 1;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: #d4d4d4;
+}
+
+.btn-checkout {
+  background: #0e639c;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+.btn-checkout:hover {
+  background: #1177bb;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #2d2d30;
+  padding: 30px;
+  border-radius: 8px;
+  min-width: 400px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content h3 {
+  color: #cccccc;
+  margin-bottom: 20px;
+}
+
+.branch-input {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}

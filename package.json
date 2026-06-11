@@ -1,0 +1,54 @@
+{
+  "name": "supergit",
+  "version": "1.0.0",
+  "description": "Easy-to-use Git and GitHub CLI GUI application",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "concurrently \"npm run start:react\" \"wait-on http://localhost:3000 && npm run start:electron\"",
+    "start:react": "react-scripts start",
+    "start:electron": "electron .",
+    "build": "react-scripts build",
+    "build:electron": "npm run build && electron-builder",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "keywords": ["git", "github", "gui", "electron"],
+  "author": "Supergit Team",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "electron-is-dev": "^2.0.0",
+    "simple-git": "^3.19.0",
+    "i18next": "^23.7.0",
+    "react-i18next": "^13.5.0"
+  },
+  "devDependencies": {
+    "electron": "^27.0.0",
+    "electron-builder": "^24.6.4",
+    "concurrently": "^8.2.0",
+    "wait-on": "^7.0.1"
+  },
+  "browserslist": {
+    "production": [">0.2%", "not dead", "not op_mini all"],
+    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
+  },
+  "build": {
+    "appId": "com.supergit.app",
+    "productName": "Supergit",
+    "files": ["build/**/*", "electron/**/*"],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "win": {
+      "target": ["nsis"]
+    },
+    "mac": {
+      "target": ["dmg"]
+    },
+    "linux": {
+      "target": ["AppImage"]
+    }
+  }
+}

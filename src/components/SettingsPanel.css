@@ -1,0 +1,84 @@
+.settings-panel {
+  max-width: 800px;
+}
+
+.settings-panel h2 {
+  font-size: 24px;
+  color: #cccccc;
+  margin-bottom: 30px;
+}
+
+.settings-section {
+  background: #2d2d30;
+  padding: 25px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.settings-section h3 {
+  color: #cccccc;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.language-options {
+  display: flex;
+  gap: 15px;
+}
+
+.language-btn {
+  background: #3e3e42;
+  color: #d4d4d4;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+
+.language-btn:hover {
+  background: #505050;
+}
+
+.language-btn.active {
+  background: #094771;
+  color: #58a6ff;
+  border-color: #58a6ff;
+  font-weight: 600;
+}
+
+.about-info {
+  color: #d4d4d4;
+}
+
+.about-info p {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.about-info strong {
+  color: #cccccc;
+}
+
+.features-list {
+  margin-top: 20px;
+  padding: 15px;
+  background: #1e1e1e;
+  border-radius: 4px;
+}
+
+.features-list h4 {
+  color: #cccccc;
+  margin-bottom: 12px;
+}
+
+.features-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.features-list li {
+  padding: 6px 0;
+  color: #d4d4d4;
+  font-size: 14px;
+}
