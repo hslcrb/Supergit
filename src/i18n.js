@@ -59,7 +59,17 @@ const resources = {
       clone: '클론',
       cloneRepo: '저장소 클론',
       repoUrl: '저장소 URL',
-      targetPath: '대상 경로'
+      targetPath: '대상 경로',
+      terminal: '터미널',
+      enterCommand: '명령어 입력...',
+      commandInput: '명령어 입력',
+      terminalHelp: 'Enter로 명령 실행, 위/아래 화살표로 이전 명령 탐색',
+      clear: '지우기',
+      change: '변경',
+      changeRepo: '저장소 변경',
+      mainNavigation: '메인 네비게이션',
+      warning: '경고',
+      workingTreeClean: '작업 트리가 깨끗합니다'
     }
   },
   en: {
@@ -119,7 +129,17 @@ const resources = {
       clone: 'Clone',
       cloneRepo: 'Clone Repository',
       repoUrl: 'Repository URL',
-      targetPath: 'Target Path'
+      targetPath: 'Target Path',
+      terminal: 'Terminal',
+      enterCommand: 'Enter command...',
+      commandInput: 'Command input',
+      terminalHelp: 'Press Enter to execute, use Up/Down arrows to navigate command history',
+      clear: 'Clear',
+      change: 'Change',
+      changeRepo: 'Change repository',
+      mainNavigation: 'Main navigation',
+      warning: 'Warning',
+      workingTreeClean: 'Working tree is clean'
     }
   }
 };
@@ -128,7 +148,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'ko',
+    lng: localStorage.getItem('supergit-language') || 'ko',
     fallbackLng: 'en',
     interpolation: {
       escapeValue: false

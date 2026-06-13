@@ -89,18 +89,18 @@ function StatusPanel({ repoPath }) {
   }
 
   return (
-    <div className="status-panel">
+    <div className="status-panel" role="region" aria-label={t('status')}>
       <div className="status-header">
-        <h2>📊 {t('status')}</h2>
+        <h2>{t('status')}</h2>
         <div className="status-actions">
-          <button onClick={handlePull} className="btn-secondary">
-            ⬇️ {t('pull')}
+          <button onClick={handlePull} className="btn-secondary" aria-label={t('pull')}>
+            {t('pull')}
           </button>
-          <button onClick={handlePush} className="btn-primary">
-            ⬆️ {t('push')}
+          <button onClick={handlePush} className="btn-primary" aria-label={t('push')}>
+            {t('push')}
           </button>
-          <button onClick={loadStatus} className="btn-secondary">
-            🔄 {t('refresh')}
+          <button onClick={loadStatus} className="btn-secondary" aria-label={t('refresh')}>
+            {t('refresh')}
           </button>
         </div>
       </div>
@@ -112,7 +112,7 @@ function StatusPanel({ repoPath }) {
 
       {status.staged && status.staged.length > 0 && (
         <div className="file-section">
-          <h3>✅ {t('stagedChanges')} ({status.staged.length})</h3>
+          <h3>{t('stagedChanges')} ({status.staged.length})</h3>
           <div className="file-list">
             {status.staged.map((file, idx) => (
               <div key={idx} className="file-item staged">
@@ -126,8 +126,8 @@ function StatusPanel({ repoPath }) {
       {(status.modified.length > 0 || status.not_added.length > 0) && (
         <div className="file-section">
           <h3>
-            📝 {t('unstagedChanges')} ({status.modified.length + status.not_added.length})
-            <button onClick={handleStageAll} className="btn-success btn-sm">
+            {t('unstagedChanges')} ({status.modified.length + status.not_added.length})
+            <button onClick={handleStageAll} className="btn-success btn-sm" aria-label={t('stageAll')}>
               {t('stageAll')}
             </button>
           </h3>
@@ -156,15 +156,15 @@ function StatusPanel({ repoPath }) {
 
       {status.staged && status.staged.length > 0 && (
         <div className="commit-section">
-          <h3>💬 {t('commit')}</h3>
+          <h3>{t('commit')}</h3>
           <textarea
             value={commitMessage}
             onChange={(e) => setCommitMessage(e.target.value)}
             placeholder={t('commitMessage')}
             className="commit-input"
           />
-          <button onClick={handleCommit} className="btn-success">
-            ✅ {t('commit')}
+          <button onClick={handleCommit} className="btn-success" aria-label={t('commit')}>
+            {t('commit')}
           </button>
         </div>
       )}

@@ -63,11 +63,15 @@ function BranchPanel({ repoPath }) {
   }
 
   return (
-    <div className="branch-panel">
+    <div className="branch-panel" role="region" aria-label={t('branches')}>
       <div className="branch-header">
-        <h2>🌿 {t('branches')}</h2>
-        <button onClick={() => setShowCreateModal(true)} className="btn-success">
-          ➕ {t('createBranch')}
+        <h2>{t('branches')}</h2>
+        <button 
+          onClick={() => setShowCreateModal(true)} 
+          className="btn-success"
+          aria-label={t('createBranch')}
+        >
+          {t('createBranch')}
         </button>
       </div>
 
@@ -78,7 +82,7 @@ function BranchPanel({ repoPath }) {
 
       <div className="branch-sections">
         <div className="branch-section">
-          <h3>📍 Local Branches</h3>
+          <h3>Local Branches</h3>
           <div className="branch-list">
             {branches.all
               .filter(b => !b.startsWith('remotes/'))
@@ -86,12 +90,13 @@ function BranchPanel({ repoPath }) {
                 const isCurrent = branch === branches.current;
                 return (
                   <div key={idx} className={`branch-item ${isCurrent ? 'current' : ''}`}>
-                    <span className="branch-icon">{isCurrent ? '●' : '○'}</span>
+                    <span className="branch-icon" aria-hidden="true">{isCurrent ? '●' : '○'}</span>
                     <span className="branch-name">{branch}</span>
                     {!isCurrent && (
                       <button
                         onClick={() => handleCheckout(branch)}
                         className="btn-checkout"
+                        aria-label={`${t('checkout')} ${branch}`}
                       >
                         {t('checkout')}
                       </button>
@@ -104,13 +109,13 @@ function BranchPanel({ repoPath }) {
 
         {branches.all.filter(b => b.startsWith('remotes/')).length > 0 && (
           <div className="branch-section">
-            <h3>🌐 Remote Branches</h3>
+            <h3>Remote Branches</h3>
             <div className="branch-list">
               {branches.all
                 .filter(b => b.startsWith('remotes/'))
                 .map((branch, idx) => (
                   <div key={idx} className="branch-item remote">
-                    <span className="branch-icon">🔗</span>
+                    <span className="branch-icon" aria-hidden="true">↗</span>
                     <span className="branch-name">{branch}</span>
                   </div>
                 ))}
@@ -120,22 +125,25 @@ function BranchPanel({ repoPath }) {
       </div>
 
       {showCreateModal && (
-        <div className="modal-overlay" onClick={() => setShowCreateModal(false)}>
+        <div className="modal-overlay" onClick={() => setShowCreateModal(false)} role="dialog" aria-modal="true" aria-labelledby="modal-title">
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h3>{t('createBranch')}</h3>
+            <h3 id="modal-title">{t('createBranch')}</h3>
+            <label htmlFor="branch-name-input" className="sr-only">{t('newBranchName')}</label>
             <input
+              id="branch-name-input"
               type="text"
               value={newBranchName}
               onChange={(e) => setNewBranchName(e.target.value)}
               placeholder={t('newBranchName')}
               className="branch-input"
               autoFocus
+              aria-required="true"
             />
             <div className="modal-actions">
-              <button onClick={handleCreateBranch} className="btn-success">
+              <button onClick={handleCreateBranch} className="btn-success" aria-label={t('create')}>
                 {t('create')}
               </button>
-              <button onClick={() => setShowCreateModal(false)} className="btn-secondary">
+              <button onClick={() => setShowCreateModal(false)} className="btn-secondary" aria-label={t('cancel')}>
                 {t('cancel')}
               </button>
             </div>

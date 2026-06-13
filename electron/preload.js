@@ -22,5 +22,8 @@ contextBridge.exposeInMainWorld('electron', {
   },
   fs: {
     selectDirectory: () => ipcRenderer.invoke('fs:selectDirectory')
+  },
+  terminal: {
+    execute: (repoPath, command) => ipcRenderer.invoke('terminal:execute', repoPath, command)
   }
 });

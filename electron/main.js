@@ -11,16 +11,19 @@ let mainWindow;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 1400,
-    height: 900,
-    minWidth: 1000,
-    minHeight: 600,
+    width: 900,
+    height: 700,
+    minWidth: 600,
+    minHeight: 400,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
       preload: path.join(__dirname, 'preload.js')
     },
-    icon: path.join(__dirname, '../assets/icon.png')
+    icon: path.join(__dirname, '../assets/icon.png'),
+    resizable: true,
+    maximizable: true,
+    backgroundColor: '#ffffff'
   });
 
   mainWindow.loadURL(
@@ -207,4 +210,18 @@ ipcMain.handle('fs:selectDirectory', async () => {
     return { success: true, path: result.filePaths[0] };
   }
   return { success: false };
+});
+
+// Terminal operations
+ipcMain.handle('terminal:execute', async (event, repoPath, command) => {
+  try {
+    const { stdout, stderr } = await execAsync(command, { 
+      cwd: repoPath,
+      timeout: 30000,
+      maxBuffer: 1024 * 1024 * 5
+    });
+    return { success: true, output: stdout || stderr };
+  } catch (error) {
+    return { success: false, error: error.message, output: error.stderr || error.stdout };
+  }
 });

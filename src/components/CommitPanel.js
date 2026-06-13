@@ -43,11 +43,11 @@ function CommitPanel({ repoPath }) {
   }
 
   return (
-    <div className="commit-panel">
+    <div className="commit-panel" role="region" aria-label={t('commitHistory')}>
       <div className="commit-header">
-        <h2>📝 {t('commitHistory')}</h2>
-        <button onClick={loadCommits} className="btn-secondary">
-          🔄 {t('refresh')}
+        <h2>{t('commitHistory')}</h2>
+        <button onClick={loadCommits} className="btn-secondary" aria-label={t('refresh')}>
+          {t('refresh')}
         </button>
       </div>
 
@@ -57,13 +57,17 @@ function CommitPanel({ repoPath }) {
             <div 
               className={`commit-item ${selectedCommit?.hash === commit.hash ? 'selected' : ''}`}
               onClick={() => handleViewCommit(commit)}
+              role="button"
+              tabIndex={0}
+              aria-expanded={selectedCommit?.hash === commit.hash}
+              aria-label={`${commit.message} by ${commit.author_name}`}
             >
               <div className="commit-hash">{commit.hash.substring(0, 7)}</div>
               <div className="commit-details">
                 <div className="commit-message">{commit.message}</div>
                 <div className="commit-meta">
-                  <span className="commit-author">👤 {commit.author_name}</span>
-                  <span className="commit-date">🕐 {formatDate(commit.date)}</span>
+                  <span className="commit-author">{commit.author_name}</span>
+                  <span className="commit-date">{formatDate(commit.date)}</span>
                 </div>
               </div>
             </div>
