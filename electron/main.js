@@ -122,10 +122,40 @@ ipcMain.handle('git:commit', async (event, repoPath, message) => {
   }
 });
 
-ipcMain.handle('git:push', async (event, repoPath, remote, branch) => {
+ipcMain.handle('git:push', async (event, repoPath, remote, branch, options = {}) => {
   try {
     const git = simpleGit(repoPath);
-    await git.push(remote, branch);
+    await git.push(remote, branch, options);
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+ipcMain.handle('git:pushCommit', async (event, repoPath, remote, commitHash) => {
+  try {
+    const git = simpleGit(repoPath);
+    await git.push(remote, `${commitHash}:refs/heads/temp-push`, ['--force']);
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+ipcMain.handle('git:fetch', async (event, repoPath, remote) => {
+  try {
+    const git = simpleGit(repoPath);
+    await git.fetch(remote || 'origin');
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+});
+
+ipcMain.handle('git:pullCommit', async (event, repoPath, commitHash) => {
+  try {
+    const git = simpleGit(repoPath);
+    await git.raw(['cherry-pick', commitHash]);
     return { success: true };
   } catch (error) {
     return { success: false, error: error.message };

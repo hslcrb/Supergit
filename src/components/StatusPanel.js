@@ -59,7 +59,7 @@ function StatusPanel({ repoPath }) {
 
   const handlePush = async () => {
     if (!status) return;
-    const result = await window.electron.git.push(repoPath, 'origin', status.current);
+    const result = await window.electron.git.push(repoPath, 'origin', status.current, {});
     if (result.success) {
       loadStatus();
     } else {
@@ -69,6 +69,15 @@ function StatusPanel({ repoPath }) {
 
   const handlePull = async () => {
     const result = await window.electron.git.pull(repoPath);
+    if (result.success) {
+      loadStatus();
+    } else {
+      setError(result.error);
+    }
+  };
+
+  const handleFetch = async () => {
+    const result = await window.electron.git.fetch(repoPath, 'origin');
     if (result.success) {
       loadStatus();
     } else {
@@ -93,6 +102,9 @@ function StatusPanel({ repoPath }) {
       <div className="status-header">
         <h2>{t('status')}</h2>
         <div className="status-actions">
+          <button onClick={handleFetch} className="btn-secondary" aria-label={t('fetch')}>
+            {t('fetch')}
+          </button>
           <button onClick={handlePull} className="btn-secondary" aria-label={t('pull')}>
             {t('pull')}
           </button>

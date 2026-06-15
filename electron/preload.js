@@ -9,8 +9,11 @@ contextBridge.exposeInMainWorld('electron', {
     createBranch: (repoPath, branchName) => ipcRenderer.invoke('git:createBranch', repoPath, branchName),
     add: (repoPath, files) => ipcRenderer.invoke('git:add', repoPath, files),
     commit: (repoPath, message) => ipcRenderer.invoke('git:commit', repoPath, message),
-    push: (repoPath, remote, branch) => ipcRenderer.invoke('git:push', repoPath, remote, branch),
+    push: (repoPath, remote, branch, options) => ipcRenderer.invoke('git:push', repoPath, remote, branch, options),
+    pushCommit: (repoPath, remote, commitHash) => ipcRenderer.invoke('git:pushCommit', repoPath, remote, commitHash),
     pull: (repoPath) => ipcRenderer.invoke('git:pull', repoPath),
+    pullCommit: (repoPath, commitHash) => ipcRenderer.invoke('git:pullCommit', repoPath, commitHash),
+    fetch: (repoPath, remote) => ipcRenderer.invoke('git:fetch', repoPath, remote),
     diff: (repoPath, file) => ipcRenderer.invoke('git:diff', repoPath, file),
     clone: (url, targetPath) => ipcRenderer.invoke('git:clone', url, targetPath)
   },

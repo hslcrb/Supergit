@@ -69,7 +69,18 @@ const resources = {
       changeRepo: '저장소 변경',
       mainNavigation: '메인 네비게이션',
       warning: '경고',
-      workingTreeClean: '작업 트리가 깨끗합니다'
+      workingTreeClean: '작업 트리가 깨끗합니다',
+      pushAll: '전체 푸시',
+      pullAll: '전체 풀',
+      fetch: '페치',
+      cherryPick: '체리픽',
+      pushThisCommit: '이 커밋 푸시',
+      cherryPickCommit: '이 커밋 체리픽',
+      commitPushedSuccess: '커밋이 성공적으로 푸시되었습니다',
+      commitPulledSuccess: '커밋이 성공적으로 체리픽되었습니다',
+      pushSuccess: '푸시 성공',
+      pullSuccess: '풀 성공',
+      fetchSuccess: '페치 성공'
     }
   },
   en: {
@@ -139,7 +150,18 @@ const resources = {
       changeRepo: 'Change repository',
       mainNavigation: 'Main navigation',
       warning: 'Warning',
-      workingTreeClean: 'Working tree is clean'
+      workingTreeClean: 'Working tree is clean',
+      pushAll: 'Push All',
+      pullAll: 'Pull All',
+      fetch: 'Fetch',
+      cherryPick: 'Cherry Pick',
+      pushThisCommit: 'Push this commit',
+      cherryPickCommit: 'Cherry-pick this commit',
+      commitPushedSuccess: 'Commit pushed successfully',
+      commitPulledSuccess: 'Commit cherry-picked successfully',
+      pushSuccess: 'Pushed successfully',
+      pullSuccess: 'Pulled successfully',
+      fetchSuccess: 'Fetched successfully'
     }
   }
 };
