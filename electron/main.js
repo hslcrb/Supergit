@@ -23,18 +23,34 @@ function createWindow() {
     icon: path.join(__dirname, '../assets/icon.png'),
     resizable: true,
     maximizable: true,
-    backgroundColor: '#ffffff'
+    backgroundColor: '#ffffff',
+    show: false
   });
 
-  mainWindow.loadURL(
-    isDev
-      ? 'http://localhost:3000'
-      : `file://${path.join(__dirname, '../build/index.html')}`
-  );
+  const startUrl = isDev
+    ? 'http://localhost:3000'
+    : `file://${path.join(__dirname, '../build/index.html')}`;
+
+  mainWindow.loadURL(startUrl);
+
+  // Show window when ready
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show();
+  });
+
+  // Debug: Log any errors
+  mainWindow.webContents.on('did-fail-load', (event, errorCode, errorDescription) => {
+    console.error('Failed to load:', errorCode, errorDescription);
+  });
 
   if (isDev) {
     mainWindow.webContents.openDevTools();
   }
+
+  // Debug in production too
+  mainWindow.webContents.on('console-message', (event, level, message, line, sourceId) => {
+    console.log(`Console [${level}]:`, message);
+  });
 }
 
 app.whenReady().then(createWindow);
@@ -56,7 +72,23 @@ ipcMain.handle('git:status', async (event, repoPath) => {
   try {
     const git = simpleGit(repoPath);
     const status = await git.status();
-    return { success: true, data: status };
+    // Convert to plain object for IPC
+    const plainStatus = {
+      current: status.current,
+      tracking: status.tracking,
+      ahead: status.ahead,
+      behind: status.behind,
+      staged: status.staged || [],
+      modified: status.modified || [],
+      created: status.created || [],
+      deleted: status.deleted || [],
+      renamed: status.renamed || [],
+      files: status.files || [],
+      not_added: status.not_added || [],
+      conflicted: status.conflicted || [],
+      isClean: status.isClean
+    };
+    return { success: true, data: plainStatus };
   } catch (error) {
     return { success: false, error: error.message };
   }
@@ -66,7 +98,25 @@ ipcMain.handle('git:log', async (event, repoPath, options = {}) => {
   try {
     const git = simpleGit(repoPath);
     const log = await git.log(options);
-    return { success: true, data: log };
+    // Convert to plain object for IPC
+    const plainLog = {
+      all: log.all.map(commit => ({
+        hash: commit.hash,
+        date: commit.date,
+        message: commit.message,
+        body: commit.body,
+        author_name: commit.author_name,
+        author_email: commit.author_email
+      })),
+      total: log.total,
+      latest: log.latest ? {
+        hash: log.latest.hash,
+        date: log.latest.date,
+        message: log.latest.message,
+        author_name: log.latest.author_name
+      } : null
+    };
+    return { success: true, data: plainLog };
   } catch (error) {
     return { success: false, error: error.message };
   }
@@ -76,7 +126,24 @@ ipcMain.handle('git:branches', async (event, repoPath) => {
   try {
     const git = simpleGit(repoPath);
     const branches = await git.branch();
-    return { success: true, data: branches };
+    // Convert to plain object for IPC
+    const plainBranches = {
+      all: branches.all || [],
+      current: branches.current,
+      branches: {}
+    };
+    // Convert branches object to plain object
+    if (branches.branches) {
+      Object.keys(branches.branches).forEach(key => {
+        plainBranches.branches[key] = {
+          current: branches.branches[key].current,
+          name: branches.branches[key].name,
+          commit: branches.branches[key].commit,
+          label: branches.branches[key].label
+        };
+      });
+    }
+    return { success: true, data: plainBranches };
   } catch (error) {
     return { success: false, error: error.message };
   }
@@ -116,7 +183,17 @@ ipcMain.handle('git:commit', async (event, repoPath, message) => {
   try {
     const git = simpleGit(repoPath);
     const result = await git.commit(message);
-    return { success: true, data: result };
+    // Convert to plain object
+    const plainResult = {
+      commit: result.commit,
+      branch: result.branch,
+      summary: result.summary ? {
+        changes: result.summary.changes,
+        insertions: result.summary.insertions,
+        deletions: result.summary.deletions
+      } : null
+    };
+    return { success: true, data: plainResult };
   } catch (error) {
     return { success: false, error: error.message };
   }
@@ -176,7 +253,8 @@ ipcMain.handle('git:diff', async (event, repoPath, file) => {
   try {
     const git = simpleGit(repoPath);
     const diff = await git.diff([file]);
-    return { success: true, data: diff };
+    // Return as string (already serializable)
+    return { success: true, data: String(diff) };
   } catch (error) {
     return { success: false, error: error.message };
   }

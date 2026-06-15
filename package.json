@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Easy-to-use Git and GitHub CLI GUI application",
   "main": "electron/main.js",
+  "homepage": "./",
   "scripts": {
     "start": "concurrently \"npm run start:react\" \"wait-on http://localhost:3000 && npm run start:electron\"",
     "start:react": "react-scripts start",
